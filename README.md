@@ -19,16 +19,16 @@ Data set contains the following informations:
 * and driver-reported passenger counts
 
 # Main Program
-Creating Spark Session
-'''  
+Creating Spark Session  
+'''python
 session = SparkSession.builder.appName("Average Velocity").getOrCreate()
 '''  
 Creating Data Frame Reader
-'''
+'''python
 dataFrameReader = session.read
 '''
 Creating Arrays for velocities of green and yellow taxis where element [0] is for "2019-05" year and [1] for "2020-05".
-'''
+'''python
 greenTaxiVelocity = []
 yellowTaxiVelocity = []
 dateArray = ["2019-05", "2020-05"]
