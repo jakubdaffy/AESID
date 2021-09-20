@@ -97,21 +97,21 @@ subprocess.run("aws s3 cp taxi_chart.png s3://aws-project-2c-ww-dw-jk/", stdout=
 
 ![diagram](https://github.com/WozniakDominik/AESID/blob/master/taxi_chart.png)
 
-#File organization
+# File organization
 In AWS console, in s3 storage, create folder for files (so called "bucket") and updload .csv files and program to this folder.
 
-#Creating Cluster
+# Creating Cluster
 In AWS console, go to EMR and click "Create cluster" button. Follow the instructions. It is important to select "Spark" in Applications in Software configuration. Important
 is also creating SSH Key.
 
-#Connect with Cluster
+# Connect with Cluster
 To connect with EMR cluster open PuTTY. In Category window go to Connection/SSH/Auth and browse for generated .ppk key file
 in Category window go to Session and fill Host Name (or IP address) inputbox with address that can be found in chosen cluster's Summary in tab "Connect to the Master Node Using SSH"  
 Next Click "Open". On PuTTY Security Alert popup window choose "Accept".
 
-#Running Program
+# Running Program
 After connecting with EMR cluster by PuTTY, input following command to copy .py program from bucket to cluster.  
-```python
+```console
 aws s3 cp s3://aws-project-2c-ww-dw-jk/aws_project_2c_ww_dw_jk.py .
 ```
 
@@ -120,5 +120,5 @@ To launch program in cluster, input following command.
 spark-submit aws_project_2c_ww_dw_jk.py
 ```
 
-#Conclusion
+# Conclusion
 Using Pyspark provides user with fast working and manipulating very large data sets with small time amount.
