@@ -95,7 +95,7 @@ subprocess.run("aws s3 cp taxi_chart.png s3://aws-project-2c-ww-dw-jk/", stdout=
 
 # Bar Diagram Output for Project
 
-![diagram](link do po wrzuceniu na githuba taxi_chart.png)
+![diagram](https://github.com/WozniakDominik/AESID/blob/master/taxi_chart.png)
 
 #File organization
 In AWS console, in s3 storage, create folder for files (so called "bucket") and updload .csv files and program to this folder.
