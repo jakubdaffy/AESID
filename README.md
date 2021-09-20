@@ -34,11 +34,11 @@ yellowTaxiVelocity = []
 dateArray = ["2019-05", "2020-05"]
 '''
 
-Definning function returning average velocity for given data set. Fuction needs Data Frame Reader, s3n source for .csv file, names of columns for pickup, dropoff and distance.
-To calculate average velocity, program uses Data Frame method to create column "Velocity" that contains distance divided by time period between pickup date and dropoff date.
-Outcome is given in [km/s] so it is needed to multiply it by 3600, so outcome will be given in [km/h]. Column "Velocity" is added to table containing data from .csv file.
-Next operation is selecting only calculated mean of all rows off "Velocity" column. That way, outcome table has only one column and row having average velocity.
-To return average velocity as value, it is needed to add ".head()[0]" as refer to data of that table. Program puts output to concrete arrays.
+Definning function returning average velocity for given data set. Fuction needs Data Frame Reader, s3n source for .csv file, names of columns for pickup, dropoff and distance.  
+To calculate average velocity, program uses Data Frame method to create column "Velocity" that contains distance divided by time period between pickup date and dropoff date.  
+Outcome is given in [km/s] so it is needed to multiply it by 3600, so outcome will be given in [km/h]. Column "Velocity" is added to table containing data from .csv file.  
+Next operation is selecting only calculated mean of all rows off "Velocity" column. That way, outcome table has only one column and row having average velocity.  
+To return average velocity as value, it is needed to add ".head()[0]" as refer to data of that table. Program puts output to concrete arrays.  
 '''
 def avgCarVelocity(dataFrameReader, src, pickup, dropoff, dist):
     return dataFrameReader.option("header","true")\
@@ -49,7 +49,7 @@ def avgCarVelocity(dataFrameReader, src, pickup, dropoff, dist):
                     .select(avg("Velocity")).head()[0]
 '''
 
-Pushing outputs to arrays with taxis velocities.
+Pushing outputs to arrays with taxis velocities.  
 '''
 greenTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c-ww-dw-jk/green_tripdata_2019-05.csv","lpep_pickup_datetime","lpep_dropoff_datetime","trip_distance"))
 greenTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c-ww-dw-jk/green_tripdata_2020-05.csv","lpep_pickup_datetime","lpep_dropoff_datetime","trip_distance"))
@@ -57,12 +57,12 @@ yellowTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c
 yellowTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c-ww-dw-jk/yellow_tripdata_2020-05.csv","tpep_pickup_datetime","tpep_dropoff_datetime","trip_distance"))
 '''
 
-Stopping Session
+Stopping Session  
 '''
 session.stop()
 '''
 
-Displaying outputs on bar diagram and saving image 
+Displaying outputs on bar diagram and saving image   
 '''
 x = np.arange(len(dateArray))
 width = 0.35
@@ -88,7 +88,7 @@ plt.show()
 plt.savefig('taxi_chart.png')
 '''
 
-Upload image with bar diagram on s3 bucket
+Upload image with bar diagram on s3 bucket  
 '''
 subprocess.run("aws s3 cp taxi_chart.png s3://aws-project-2c-ww-dw-jk/", stdout=subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
 '''
@@ -106,16 +106,16 @@ is also creating SSH Key.
 
 #Connect with Cluster
 To connect with EMR cluster open PuTTY. In Category window go to Connection/SSH/Auth and browse for generated .ppk key file
-in Category window go to Session and fill Host Name (or IP address) inputbox with address that can be found in chosen cluster's Summary in tab "Connect to the Master Node Using SSH"
+in Category window go to Session and fill Host Name (or IP address) inputbox with address that can be found in chosen cluster's Summary in tab "Connect to the Master Node Using SSH"  
 Next Click "Open". On PuTTY Security Alert popup window choose "Accept".
 
 #Running Program
-After connecting with EMR cluster by PuTTY, input following command to copy .py program from bucket to cluster.
+After connecting with EMR cluster by PuTTY, input following command to copy .py program from bucket to cluster.  
 '''
 aws s3 cp s3://aws-project-2c-ww-dw-jk/aws_project_2c_ww_dw_jk.py .
 '''
 
-To launch program in cluster, input following command.
+To launch program in cluster, input following command.  
 '''
 spark-submit aws_project_2c_ww_dw_jk.py
 '''
