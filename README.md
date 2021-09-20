@@ -1,11 +1,11 @@
 # Average Velocity
 Project using AWS to calculate average velocity of New York's taxis and visualising them on bar diagram.
 
-#Used Technologies
+# Used Technologies
 
-*Python
-*Spark
-*Aws
+* Python
+* Spark
+* AWS
 
 # Data Structure
 Data set contains the following informations:
@@ -19,7 +19,7 @@ Data set contains the following informations:
 * and driver-reported passenger counts
 
 # Main Program
-Creating Spark Session  
+Creating Spark Session
 ```python
 session = SparkSession.builder.appName("Average Velocity").getOrCreate()
 ``` 
@@ -34,11 +34,7 @@ yellowTaxiVelocity = []
 dateArray = ["2019-05", "2020-05"]
 ```
 
-Definning function returning average velocity for given data set. Fuction needs Data Frame Reader, s3n source for .csv file, names of columns for pickup, dropoff and distance.  
-To calculate average velocity, program uses Data Frame method to create column "Velocity" that contains distance divided by time period between pickup date and dropoff date.  
-Outcome is given in [km/s] so it is needed to multiply it by 3600, so outcome will be given in [km/h]. Column "Velocity" is added to table containing data from .csv file.  
-Next operation is selecting only calculated mean of all rows off "Velocity" column. That way, outcome table has only one column and row having average velocity.  
-To return average velocity as value, it is needed to add ".head()[0]" as refer to data of that table. Program puts output to concrete arrays.  
+Definning function returning average velocity for given data set. Fuction needs Data Frame Reader, s3n source for .csv file, names of columns for pickup, dropoff and distance. To calculate average velocity, program uses Data Frame method to create column "Velocity" that contains distance divided by time period between pickup date and dropoff date. Outcome is given in [km/s] so it is needed to multiply it by 3600, so outcome will be given in [km/h]. Column "Velocity" is added to table containing data from .csv file. Next operation is selecting only calculated mean of all rows off "Velocity" column. That way, outcome table has only one column and row having average velocity. To return average velocity as value, it is needed to add ".head()[0]" as refer to data of that table. Program puts output to concrete arrays.
 ```python
 def avgCarVelocity(dataFrameReader, src, pickup, dropoff, dist):
     return dataFrameReader.option("header","true")\
@@ -49,7 +45,7 @@ def avgCarVelocity(dataFrameReader, src, pickup, dropoff, dist):
                     .select(avg("Velocity")).head()[0]
 ```
 
-Pushing outputs to arrays with taxis velocities.  
+Pushing outputs to arrays with taxis velocities.
 ```python
 greenTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c-ww-dw-jk/green_tripdata_2019-05.csv","lpep_pickup_datetime","lpep_dropoff_datetime","trip_distance"))
 greenTaxiVelocity.append( avgCarVelocity(dataFrameReader ,"s3n://aws-project-2c-ww-dw-jk/green_tripdata_2020-05.csv","lpep_pickup_datetime","lpep_dropoff_datetime","trip_distance"))
