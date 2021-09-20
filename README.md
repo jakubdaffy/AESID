@@ -116,7 +116,7 @@ aws s3 cp s3://aws-project-2c-ww-dw-jk/aws_project_2c_ww_dw_jk.py .
 ```
 
 To launch program in cluster, input following command.  
-```python
+```console
 spark-submit aws_project_2c_ww_dw_jk.py
 ```
 
