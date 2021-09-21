@@ -84,7 +84,7 @@ plt.show()
 plt.savefig('taxi_chart.png')
 ```
 
-Upload image with bar diagram on s3 bucket.  
+Uploading image with bar diagram on s3 bucket.  
 ```python
 subprocess.run("aws s3 cp taxi_chart.png s3://aws-project-2c-ww-dw-jk/", stdout=subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
 ```
